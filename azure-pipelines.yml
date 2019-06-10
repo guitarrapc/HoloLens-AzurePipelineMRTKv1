@@ -49,7 +49,7 @@ steps:
   inputs:
     buildTarget: WindowsStoreApps
     commandLineArgumentsMode: custom
-    customCommandLineArguments: '-ExecuteMethod Microsoft.MixedReality.Toolkit.Build.Editor.UnityPlayerBuildTools.StartCommandLineBuild -logfile $(Build.ArtifactStagingDirectory)/Editor.log'
+    customCommandLineArguments: '-ExecuteMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN -logfile $(Build.ArtifactStagingDirectory)/Editor.log'
   continueOnError: true
 
 - task: PublishPipelineArtifact@0
@@ -69,8 +69,8 @@ steps:
 - task: MSBuild@1
   displayName: 'Build solution'
   inputs:
-    solution: 'Builds/WSAPlayer/*.sln'
-    platform: x64
+    solution: 'UWP'
+    platform: x86
     configuration: Release
     msbuildArguments: '/P:PlatformToolset=v142;AppxBundle=Always;AppxBundlePlatforms=x64'
 

@@ -66,4 +66,5 @@ crashlytics-build.properties
 
 ### Custom
 
-Builds/WSAPlayer/
+UWP/
+*.log
