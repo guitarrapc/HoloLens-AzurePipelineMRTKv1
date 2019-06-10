@@ -66,6 +66,8 @@ steps:
   inputs:
     restoreSolution: 'Builds/WSAPlayer/*.sln'
 
+- pwsh: Get-ChildItem -Directory -Recurse
+
 - task: MSBuild@1
   displayName: 'Build solution'
   inputs:
