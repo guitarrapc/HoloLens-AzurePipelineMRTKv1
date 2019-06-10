@@ -14,4 +14,4 @@ MSBuild (IL2CPP C++ build)
 
 appx output at
 
-> Builds\WSAPlayer\AppPackages\UnitySample\UnitySample_1.0.4.0_Test>
+> UWP\AppPackages\UnitySamplev1\UnitySamplev1_1.0.0.0_Test
