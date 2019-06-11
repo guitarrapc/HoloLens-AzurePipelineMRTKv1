@@ -48,8 +48,8 @@ steps:
   displayName: 'Unity Build WindowsStoreApps'
   inputs:
     buildTarget: WindowsStoreApps
-    commandLineArgumentsMode: custom
-    customCommandLineArguments: '-ExecuteMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN -logfile $(Build.ArtifactStagingDirectory)/Editor.log'
+    #commandLineArgumentsMode: custom
+    #customCommandLineArguments: '-ExecuteMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN -logfile $(Build.ArtifactStagingDirectory)/Editor.log'
   continueOnError: true
 
 - task: PublishPipelineArtifact@0
