@@ -14,6 +14,7 @@ pool:
 # https://dev.azure.com/YOUR_ORG/YOUR_PROJECT/_apps/hub/ms.vss-ciworkflow.build-ci-hub?_a=edit-build-definition&id=YOUR_ID&view=Tab_Variables
 variables:
   unitygetprojectversion.projectVersion: 2018.3.13f1
+  UnityPath: 'C:\Program Files\Unity\Hub\Editor\2018.3.13f1\Editor\Unity.exe'
   #unity.username: YOUR_USER_NAME_AS_SECRET
   #unity.password: YOUR_USER_PASSWORD_AS_SECRET
   #unity.serialkey: YOUR_UNITY_SERIALKEY_AS_SECRET
@@ -45,13 +46,17 @@ steps:
     password: '$(unity.password)'
     serial: '$(unity.serialkey)'
 
-- task: DinomiteStudios.64e90d50-a9c0-11e8-a356-d3eab7857116.custom-unity-build-task.UnityBuildTask@2
-  displayName: 'Unity Build WindowsStoreApps'
-  inputs:
-    buildTarget: WindowsStoreApps
-    commandLineArgumentsMode: custom
-    customCommandLineArguments: '-ExecuteMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN -logfile $(Build.ArtifactStagingDirectory)/Editor.log'
-  continueOnError: true
+- task: dotnet tool install --global UnityBuildRunner
+
+- script: UnityBuildRunner -quit -batchmode -projectPath $(Build.Repository.LocalPath) -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
+
+# - task: DinomiteStudios.64e90d50-a9c0-11e8-a356-d3eab7857116.custom-unity-build-task.UnityBuildTask@2
+#   displayName: 'Unity Build WindowsStoreApps'
+#   inputs:
+#     buildTarget: WindowsStoreApps
+#     commandLineArgumentsMode: custom
+#     customCommandLineArguments: '-ExecuteMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN -logfile $(Build.ArtifactStagingDirectory)/Editor.log'
+#   continueOnError: true
 
 - task: PublishPipelineArtifact@0
   displayName: 'Publish Pipeline Artifact'
