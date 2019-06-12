@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmIamge: 'vs2017-win2016'
+  vmImage: 'vs2017-win2016'
   #vmImage: 'windows-2019'
 
 # make sure you have set variables for followings at AzureDevOps Pipeline Variable configuration UI.
