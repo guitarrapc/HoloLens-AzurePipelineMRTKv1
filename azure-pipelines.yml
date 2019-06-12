@@ -46,7 +46,7 @@ steps:
     password: '$(unity.password)'
     serial: '$(unity.serialkey)'
 
-- task: dotnet tool install --global UnityBuildRunner
+- script: dotnet tool install --global UnityBuildRunner
 
 - script: UnityBuildRunner -quit -batchmode -projectPath $(Build.Repository.LocalPath) -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
 
