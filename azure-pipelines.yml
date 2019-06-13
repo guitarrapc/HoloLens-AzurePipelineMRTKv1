@@ -47,7 +47,7 @@ steps:
 
 - script: dotnet tool install --global UnityBuildRunner
 
-- script: UnityBuildRunner -quit -batchmode -projectPath $(Build.Repository.LocalPath) -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
+- script: UnityBuildRunner -quit -batchmode -projectPath $(Build.Repository.LocalPath) -buildTarget WSAPlayer -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
 
 # - task: DinomiteStudios.64e90d50-a9c0-11e8-a356-d3eab7857116.custom-unity-build-task.UnityBuildTask@2
 #   displayName: 'Unity Build WindowsStoreApps'
