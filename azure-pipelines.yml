@@ -85,7 +85,7 @@ steps:
     solution: 'UWP'
     platform: x86
     configuration: Release
-    msbuildArguments: '/P:PlatformToolset=v142;AppxBundle=Always;AppxBundlePlatforms=x64'
+    msbuildArguments: '/P:PlatformToolset=v142;AppxBundle=Always;AppxBundlePlatforms=x86'
 
 - task: PublishPipelineArtifact@0
   displayName: 'Publish Pipeline Artifact'
