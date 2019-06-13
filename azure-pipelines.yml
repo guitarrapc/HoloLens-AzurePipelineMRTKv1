@@ -46,9 +46,12 @@ steps:
     serial: '$(unity.serialkey)'
 
 - script: dotnet tool install --global UnityBuildRunner
+  displayName: 'Install UnityBuildRunner'
 
 - script: UnityBuildRunner -quit -batchmode -projectPath $(Build.Repository.LocalPath) -buildTarget WSAPlayer -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
+  displayName: 'Unity Build'
 
+# UnityBuildTask@2 could not show build status, and is failed to build....
 # - task: DinomiteStudios.64e90d50-a9c0-11e8-a356-d3eab7857116.custom-unity-build-task.UnityBuildTask@2
 #   displayName: 'Unity Build WindowsStoreApps'
 #   inputs:
@@ -71,13 +74,12 @@ steps:
   inputs:
     restoreSolution: 'UWP/*.sln'
 
-- pwsh: Get-ChildItem -Directory -Recurse
-
-- task: PublishPipelineArtifact@0
-  displayName: 'Publish Pipeline Artifact'
-  inputs:
-    artifactName: 'UWP_Sln'
-    targetPath: 'UWP'
+# if you want to build locally
+# - task: PublishPipelineArtifact@0
+#   displayName: 'Publish Pipeline Artifact'
+#   inputs:
+#     artifactName: 'UWP_Sln'
+#     targetPath: 'UWP'
 
 - task: MSBuild@1
   displayName: 'Build solution'
