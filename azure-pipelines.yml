@@ -11,9 +11,8 @@ pool:
 
 # make sure you have set variables for followings at AzureDevOps Pipeline Variable configuration UI.
 # https://dev.azure.com/YOUR_ORG/YOUR_PROJECT/_apps/hub/ms.vss-ciworkflow.build-ci-hub?_a=edit-build-definition&id=YOUR_ID&view=Tab_Variables
-variables:
-  unitygetprojectversion.projectVersion: 2018.3.13f1
-  UnityPath: 'C:\Program Files\Unity\Hub\Editor\2018.3.13f1\Editor\Unity.exe'
+#variables:
+  #UnityPath: 'C:\Program Files\Unity\Hub\Editor\2018.3.13f1\Editor\Unity.exe'
   #unity.username: YOUR_USER_NAME_AS_SECRET
   #unity.password: YOUR_USER_PASSWORD_AS_SECRET
   #unity.serialkey: YOUR_UNITY_SERIALKEY_AS_SECRET
@@ -24,10 +23,11 @@ steps:
   fetchDepth: 1
   lfs: false
 
-# YAML Build not support output variable, so it won't work on YAML at current 10/June/2019. 
+# YAML Build not support output variable but you can  get task output variable with `name` key.
 # refer: https://developercommunity.visualstudio.com/content/problem/335706/output-variable-set-in-the-vsts-task-does-not-show.html
 - task: DinomiteStudios.64e90d50-a9c0-11e8-a356-d3eab7857116.custom-unity-get-project-version-task.UnityGetProjectVersionTask@1
   displayName: 'Unity Get Project Version'
+  name: unitygetprojectversion
   enabled: false
 
 - pwsh: Install-Module -Name UnitySetup -AllowPrerelease -Scope CurrentUser -Force
@@ -48,7 +48,7 @@ steps:
 - script: dotnet tool install --global UnityBuildRunner
   displayName: 'Install UnityBuildRunner'
 
-- script: UnityBuildRunner -quit -batchmode -projectPath $(Build.Repository.LocalPath) -buildTarget WSAPlayer -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
+- script: UnityBuildRunner -quit -batchmode -u 'C:\Program Files\Unity\Hub\Editor\$(unitygetprojectversion.projectVersion)\Editor\Unity.exe' -projectPath $(Build.Repository.LocalPath) -buildTarget WSAPlayer -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
   displayName: 'Unity Build'
 
 # UnityBuildTask@2 could not show build status, and is failed to build....
