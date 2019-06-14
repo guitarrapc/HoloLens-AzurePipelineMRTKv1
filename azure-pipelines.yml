@@ -28,7 +28,7 @@ steps:
 - task: DinomiteStudios.64e90d50-a9c0-11e8-a356-d3eab7857116.custom-unity-get-project-version-task.UnityGetProjectVersionTask@1
   displayName: 'Unity Get Project Version'
   name: unitygetprojectversion
-  enabled: false
+  enabled: true
 
 - pwsh: Install-Module -Name UnitySetup -AllowPrerelease -Scope CurrentUser -Force
   displayName: 'Install UnitySetup Module'
