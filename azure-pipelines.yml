@@ -47,7 +47,10 @@ steps:
 - script: dotnet tool install --global UnityBuildRunner
   displayName: 'Install UnityBuildRunner'
 
-- script: UnityBuildRunner -quit -batchmode -unityPath "C:\Program Files\Unity\Hub\Editor\$(unitygetprojectversion.projectVersion)\Editor\Unity.exe" -projectPath $(Build.Repository.LocalPath) -buildTarget WSAPlayer -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
+- script: 
+    set UnityPath=C:\Program Files\Unity\Hub\Editor\$(unitygetprojectversion.projectVersion)\Editor\Unity.exe
+    echo %UnityPath%
+    UnityBuildRunner -quit -batchmode -projectPath $(Build.Repository.LocalPath) -buildTarget WSAPlayer -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
   displayName: 'Unity Build'
 
 # UnityBuildTask@2 could not show build status, and is failed to build....
