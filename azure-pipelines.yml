@@ -24,6 +24,7 @@ steps:
 
 # YAML Build not support output variable but you can  get task output variable with `name` key.
 # refer: https://developercommunity.visualstudio.com/content/problem/335706/output-variable-set-in-the-vsts-task-does-not-show.html
+# use name instead to reference output variable.
 - task: DinomiteStudios.64e90d50-a9c0-11e8-a356-d3eab7857116.custom-unity-get-project-version-task.UnityGetProjectVersionTask@1
   displayName: 'Unity Get Project Version'
   name: unitygetprojectversion
@@ -48,7 +49,6 @@ steps:
 
 - script: |
     set UnityPath=C:\Program Files\Unity\Hub\Editor\$(unitygetprojectversion.projectVersion)\Editor\Unity.exe
-    echo %UnityPath%
     UnityBuildRunner -quit -batchmode -projectPath $(Build.Repository.LocalPath) -buildTarget WSAPlayer -logfile $(Build.ArtifactStagingDirectory)\Editor.log -executeMethod HoloToolkit.Unity.BuildDeployTools.BuildSLN
   displayName: 'Unity Build'
 
